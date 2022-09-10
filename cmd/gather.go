@@ -10,7 +10,7 @@ import (
 
 const (
 	outputName = "output"
-	topName    = "top"
+	numName    = "sites-number"
 	offsetName = "offset"
 )
 
@@ -18,7 +18,7 @@ func init() {
 	f := gatherCmd.Flags()
 	f.StringVarP(&output, outputName, "o", "", "specify the path to the directory to place screenshots in (required)")
 	gatherCmd.MarkFlagRequired(outputName)
-	f.IntVarP(&top, topName, "t", 10, "specify the number of top websites to retrieve screenshots from")
+	f.IntVarP(&num, numName, "n", 10, "specify the number of top websites to retrieve screenshots from")
 	f.IntVarP(&offset, offsetName, "s", 0, "specify the number of websites to skip from the top of the list")
 
 	rootCmd.AddCommand(gatherCmd)
@@ -33,12 +33,12 @@ var gatherCmd = &cobra.Command{
 // flags
 var (
 	output string
-	top    int
+	num    int
 	offset int
 )
 
 func run(cmd *cobra.Command, args []string) error {
-	s := site.Top(top, offset)
+	s := site.Top(num, offset)
 	ss := screenshot.New()
 	g := gather.New(s, ss)
 	return g.Gather("./")

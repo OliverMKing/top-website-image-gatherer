@@ -13,7 +13,7 @@ To retrieve screenshots run the 'twig gather' command
 
 	$ twig gather -o ./example/output/path
 
-Running this will take screenshots of the top websites and output them to the specified directory. Use the -t flag to specify the number of websites to pull from.`,
+Running this will take screenshots of the top websites and output them to the specified directory. Use the -n flag to specify the number of websites to pull from.`,
 }
 
 // Execute runs the root command and should only happen once
