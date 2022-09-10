@@ -37,7 +37,5 @@ var (
 
 func run(cmd *cobra.Command, args []string) error {
 	g := gather.New("outputpath", top, offset)
-	g.Gather()
-
-	return nil
+	return g.Gather()
 }
