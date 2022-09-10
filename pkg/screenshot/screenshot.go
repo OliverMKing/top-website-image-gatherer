@@ -17,12 +17,15 @@ type Screenshoter interface {
 	Screenshot(s site.Site, output string) error
 }
 
-type screenshoter struct{}
+type screenshoter struct {
+	wait time.Duration
+}
 
 var _ Screenshoter = &screenshoter{}
 
-func New() Screenshoter {
-	return &screenshoter{}
+// New creates a new screenshoter. Wait is the amount of time to wait for a page to load before screenshotting
+func New(wait time.Duration) Screenshoter {
+	return &screenshoter{wait: wait}
 }
 
 func (ss *screenshoter) Screenshot(s site.Site, output string) error {
@@ -43,7 +46,7 @@ func (ss *screenshoter) Screenshot(s site.Site, output string) error {
 	var buf []byte
 	tasks := chromedp.Tasks{
 		chromedp.Navigate(url),
-		chromedp.Sleep(2 * time.Second),
+		chromedp.Sleep(ss.wait),
 		chromedp.FullScreenshot(&buf, 102),
 	}
 

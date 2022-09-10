@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"time"
 	"top-website-image-gatherer/pkg/gather"
 	"top-website-image-gatherer/pkg/screenshot"
 	"top-website-image-gatherer/pkg/site"
@@ -45,7 +46,7 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 
 	s := site.Top(num, offset)
-	ss := screenshot.New()
+	ss := screenshot.New(3 * time.Second)
 	g := gather.New(s, ss)
 	return g.Gather(output)
 }
