@@ -37,7 +37,7 @@ func (ss *screenshoter) Screenshot(s site.Site, output string) error {
 	opts = append(opts, chromedp.WindowSize(1400, 900))
 	opts = append(opts, chromedp.DefaultExecAllocatorOptions[:]...)
 
-	actx, acancel := chromedp.NewExecAllocator(context.Background(), opts...)
+	actx, acancel := chromedp.NewExecAllocator(context.TODO(), opts...)
 	defer acancel()
 
 	ctx, cancel := chromedp.NewContext(actx)
@@ -51,13 +51,13 @@ func (ss *screenshoter) Screenshot(s site.Site, output string) error {
 	}
 
 	if err := chromedp.Run(ctx, tasks); err != nil {
-		return err
+		return fmt.Errorf("running screenshot tasks for %s: %w", url, err)
 	}
 
 	filename := fmt.Sprintf("%s-%d.%s", s.Url.Path, time.Now().UTC().Unix(), "png")
 	filepath := path.Join(output, filename)
 	if err := ioutil.WriteFile(filepath, buf, 0644); err != nil {
-		log.Fatal(err)
+		return fmt.Errorf("writing image %s for %s: %w", filepath, url, err)
 	}
 	log.Printf("..............saved screenshot to file %s", filepath)
 

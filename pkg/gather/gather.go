@@ -1,9 +1,11 @@
 package gather
 
 import (
-	"fmt"
+	"context"
 	"top-website-image-gatherer/pkg/screenshot"
 	"top-website-image-gatherer/pkg/site"
+
+	"golang.org/x/sync/errgroup"
 )
 
 type progress struct {
@@ -30,11 +32,28 @@ func New(sites []site.Site, screenshoter screenshot.Screenshoter) Gatherer {
 
 // Gather gathers the screenshots of top websites and places them in the output directory
 func (g *gatherer) Gather(output string) error {
-	for _, site := range g.sites {
-		if err := g.screenshoter.Screenshot(site, output); err != nil {
-			return fmt.Errorf("screenshotting: %w", err)
-		}
+	eg, _ := errgroup.WithContext(context.TODO())
+	sitesCh := make(chan site.Site)
+
+	numGoroutines := 5
+	for i := 0; i < numGoroutines; i++ {
+		eg.Go(func(ch <-chan site.Site) func() error {
+			return func() error {
+				for site := range ch {
+					if err := g.screenshoter.Screenshot(site, output); err != nil {
+						return err
+					}
+				}
+
+				return nil
+			}
+		}(sitesCh))
 	}
 
-	return nil
+	for _, site := range g.sites {
+		sitesCh <- site
+	}
+	close(sitesCh)
+
+	return eg.Wait()
 }
