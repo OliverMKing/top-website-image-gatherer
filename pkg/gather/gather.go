@@ -23,9 +23,8 @@ type gatherer struct {
 
 var _ Gatherer = &gatherer{}
 
-// New creates a new gatherer that will screenshot the top (number of sites) and offset from the top of the list
-func New(top, offset int, screenshoter screenshot.Screenshoter) Gatherer {
-	sites := site.Top(top, offset)
+// New creates a new gatherer that will screenshot the provided sites
+func New(sites []site.Site, screenshoter screenshot.Screenshoter) Gatherer {
 	return &gatherer{sites: sites, screenshoter: screenshoter}
 }
 

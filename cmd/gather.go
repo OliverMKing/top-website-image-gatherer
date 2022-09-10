@@ -3,6 +3,7 @@ package cmd
 import (
 	"top-website-image-gatherer/pkg/gather"
 	"top-website-image-gatherer/pkg/screenshot"
+	"top-website-image-gatherer/pkg/site"
 
 	"github.com/spf13/cobra"
 )
@@ -37,7 +38,8 @@ var (
 )
 
 func run(cmd *cobra.Command, args []string) error {
+	s := site.Top(top, offset)
 	ss := screenshot.New()
-	g := gather.New(top, offset, ss)
+	g := gather.New(s, ss)
 	return g.Gather("./")
 }
