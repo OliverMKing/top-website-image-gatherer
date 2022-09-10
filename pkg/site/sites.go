@@ -34,6 +34,6 @@ func (s Site) EnsureScheme() {
 }
 
 // Top returns the top websites with an offset and number of sites
-func Top(number, offset int) []Site {
-	return sites[offset : offset+number]
+func Top(num, offset int) []Site {
+	return sites[offset : offset+num]
 }

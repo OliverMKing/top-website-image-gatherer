@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"path"
 	"time"
 	"top-website-image-gatherer/pkg/site"
 
@@ -51,10 +52,11 @@ func (ss *screenshoter) Screenshot(s site.Site, output string) error {
 	}
 
 	filename := fmt.Sprintf("%s-%d.%s", s.Url.Path, time.Now().UTC().Unix(), "png")
-	if err := ioutil.WriteFile(filename, buf, 0644); err != nil {
+	filepath := path.Join(output, filename)
+	if err := ioutil.WriteFile(filepath, buf, 0644); err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("..............saved screenshot to file %s", filename)
+	log.Printf("..............saved screenshot to file %s", filepath)
 
 	return nil
 }

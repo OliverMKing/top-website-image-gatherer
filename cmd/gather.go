@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+	"os"
 	"top-website-image-gatherer/pkg/gather"
 	"top-website-image-gatherer/pkg/screenshot"
 	"top-website-image-gatherer/pkg/site"
@@ -38,8 +40,12 @@ var (
 )
 
 func run(cmd *cobra.Command, args []string) error {
+	if err := os.MkdirAll(output, os.ModePerm); err != nil {
+		return fmt.Errorf("creating output directory %s: %w", output, err)
+	}
+
 	s := site.Top(num, offset)
 	ss := screenshot.New()
 	g := gather.New(s, ss)
-	return g.Gather("./")
+	return g.Gather(output)
 }
