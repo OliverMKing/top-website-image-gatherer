@@ -9,11 +9,6 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-type progress struct {
-	complete int
-	total    int
-}
-
 // Gatherer gathers screenshots of top websites and places them in the output directory
 type Gatherer interface {
 	Gather(output string) error
