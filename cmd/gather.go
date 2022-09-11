@@ -45,7 +45,11 @@ func run(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("creating output directory %s: %w", output, err)
 	}
 
-	s := site.Top(num, offset)
+	s, err := site.Top(num, offset)
+	if err != nil {
+		return err
+	}
+
 	ss := screenshot.New(3 * time.Second)
 	g := gather.New(s, ss)
 	return g.Gather(output)
