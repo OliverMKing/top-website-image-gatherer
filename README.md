@@ -27,3 +27,17 @@ sudo cp twig /usr/local/bin/twig
 Installs the binary, makes it executable, and adds it to the path. Now the `twig` is available and can be run.
 
 Running `twig gather -o ./screenshots -n 5` will install the top 5 website's screenshots to the `./screenshots` directory.
+
+This tool will commonly be used to download an extremely large number of screenshots. However, due to storage constraints pagination could be needed. You can write a script to assist.
+
+We created a [starting bash script](./example.sh) for you to build off.
+
+```bash
+wget https://raw.githubusercontent.com/OliverMKing/twig/main/example.sh
+chmod +x ./example.sh
+./example.sh
+```
+
+Installs the script, makes it executable, then runs it. 
+
+The example script downloads 1000 top website images in batches of 100. There's a comment marking where you could add functionality that does something with the screenshots
