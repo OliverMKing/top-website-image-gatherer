@@ -7,7 +7,7 @@ import (
 	"log"
 	"path"
 	"time"
-	"top-website-image-gatherer/pkg/site"
+	"twig/pkg/site"
 
 	"github.com/chromedp/chromedp"
 )

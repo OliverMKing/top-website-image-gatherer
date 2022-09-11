@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 	"time"
-	"top-website-image-gatherer/pkg/gather"
-	"top-website-image-gatherer/pkg/screenshot"
-	"top-website-image-gatherer/pkg/site"
+	"twig/pkg/gather"
+	"twig/pkg/screenshot"
+	"twig/pkg/site"
 
 	"github.com/spf13/cobra"
 )

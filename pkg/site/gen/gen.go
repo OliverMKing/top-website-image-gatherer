@@ -12,7 +12,7 @@ import (
 	"log"
 	"net/url"
 	"os"
-	"top-website-image-gatherer/pkg/site"
+	"twig/pkg/site"
 )
 
 const (

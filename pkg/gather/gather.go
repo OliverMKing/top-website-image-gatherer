@@ -3,8 +3,8 @@ package gather
 import (
 	"context"
 	"log"
-	"top-website-image-gatherer/pkg/screenshot"
-	"top-website-image-gatherer/pkg/site"
+	"twig/pkg/screenshot"
+	"twig/pkg/site"
 
 	"golang.org/x/sync/errgroup"
 )

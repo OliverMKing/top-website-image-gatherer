@@ -1,6 +1,6 @@
 package main
 
-import "top-website-image-gatherer/cmd"
+import "twig/cmd"
 
 func main() {
 	cmd.Execute()

@@ -1,4 +1,4 @@
-module top-website-image-gatherer
+module twig
 
 go 1.19
 
