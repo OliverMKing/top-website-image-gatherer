@@ -32,7 +32,7 @@ func (ss *screenshoter) Screenshot(s site.Site, output string) error {
 	s.EnsureScheme()
 	url := s.Url.String()
 
-	log.Printf("................making request for screenshot using %s", url)
+	log.Printf("making request for screenshot using %s", url)
 	var opts []chromedp.ExecAllocatorOption
 	opts = append(opts, chromedp.WindowSize(1400, 900))
 	opts = append(opts, chromedp.DefaultExecAllocatorOptions[:]...)
@@ -59,7 +59,7 @@ func (ss *screenshoter) Screenshot(s site.Site, output string) error {
 	if err := ioutil.WriteFile(filepath, buf, 0644); err != nil {
 		return fmt.Errorf("writing image %s for %s: %w", filepath, url, err)
 	}
-	log.Printf("..............saved screenshot to file %s", filepath)
+	log.Printf("saved screenshot to file %s", filepath)
 
 	return nil
 }
