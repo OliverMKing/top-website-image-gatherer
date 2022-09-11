@@ -2,6 +2,7 @@ package gather
 
 import (
 	"context"
+	"log"
 	"top-website-image-gatherer/pkg/screenshot"
 	"top-website-image-gatherer/pkg/site"
 
@@ -32,6 +33,8 @@ func New(sites []site.Site, screenshoter screenshot.Screenshoter) Gatherer {
 
 // Gather gathers the screenshots of top websites and places them in the output directory
 func (g *gatherer) Gather(output string) error {
+	log.Print("starting to gather screenshots")
+
 	eg, _ := errgroup.WithContext(context.TODO())
 	sitesCh := make(chan site.Site)
 
@@ -55,5 +58,10 @@ func (g *gatherer) Gather(output string) error {
 	}
 	close(sitesCh)
 
-	return eg.Wait()
+	if err := eg.Wait(); err != nil {
+		return err
+	}
+
+	log.Printf("finished gathering screenshots to %s", output)
+	return nil
 }
