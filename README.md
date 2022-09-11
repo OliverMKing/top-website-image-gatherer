@@ -2,7 +2,7 @@
 
 TWIG (top website image gatherer) is a cli tool that downloads screenshots of top websites
 
-## Usage
+## Install
 
 Download the binary that fits your OS and architecture from the [releases](https://github.com/OliverMKing/twig/releases) page. Then either run the binary or add it to your path.
 
@@ -14,9 +14,18 @@ go install github.com/OliverMKing/twig@latest
 
 Note: You must have Google Chrome installed (or an alternative driver compatable with [chromedp](https://github.com/chromedp/chromedp)).
 
-### Example usage
+## Usage
 
 Walking through a scenario of how to install and use this project on Ubuntu.
+
+
+```bash
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+```
+
+Installs Google Chrome and is only needed if it's not already installed.
+
 
 ```bash
 wget -O twig https://github.com/OliverMKing/twig/releases/download/v0.0.1/twig-linux-amd64
