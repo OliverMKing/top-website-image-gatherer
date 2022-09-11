@@ -37,7 +37,7 @@ func (s Site) EnsureScheme() {
 // Top returns the top websites with an offset and number of sites
 func Top(num, offset int) ([]Site, error) {
 	if l := len(sites); offset+num >= l {
-		return nil, fmt.Errorf("num %d and offset %d out of range %d", num, offset, l)
+		return nil, fmt.Errorf("num %d + offset %d out of sites range 0 to %d", num, offset, l)
 	}
 
 	return sites[offset : offset+num], nil
